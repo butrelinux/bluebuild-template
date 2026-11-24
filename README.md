@@ -1,15 +1,24 @@
 # BlueBuild Template &nbsp; [![bluebuild build badge](https://github.com/blue-build/template/actions/workflows/build.yml/badge.svg)](https://github.com/blue-build/template/actions/workflows/build.yml)
 
-See the [BlueBuild docs](https://blue-build.org/how-to/setup/) for quick setup instructions for setting up your own repository based on this template.
+1. Open https://github.com/butrelinux/bluebuild-template.
+2. Press “Use this template” and create a new repository.  
+3. Set up container signing
+    1. Clone your repository
+    2. Within your repository, generate a new key pair with ```cosign generate-key-pair```
+    3. When prompted for a password, just press enter.  This will be used in GitHub Actions and cannot be encrypted.
+    4. Set the signing secret with ```gh secret set SIGNING_SECRET < cosign.key```
+4. Change the name: in recipes/recipe.yml and commit your changes. You can also apply some initial customizations here.  
+5. Open the Actions tab of your repository and make sure GitHub Actions are enabled.  
+6. Change all references to butrelinux/bluebuild-template in the README.md to the details of your repository or custom image and commit your changes. You should also change the title and the short description below it so that people stumbling on your repository know what they are looking at.  
+7. You’re done! You can now open recipes/recipe.yml and start customizing! The reference section of the documentation is your friend here.  
 
-After setup, it is recommended you update this README to describe your custom image.
 
 ## Installation
 
 > [!WARNING]  
 > [This is an experimental feature](https://www.fedoraproject.org/wiki/Changes/OstreeNativeContainerStable), try at your own discretion.
 
-To rebase an existing atomic butrelinux image to the latest build
+To rebase an existing butrelinux image to your own build
 ```bash
 # this is just an example.  change the username in this image to your own.
 # if you change the package name or the tag, you'll need to change that too
