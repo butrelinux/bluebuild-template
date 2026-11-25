@@ -1,4 +1,4 @@
-# BlueBuild Template &nbsp; [![bluebuild build badge](https://github.com/blue-build/template/actions/workflows/build.yml/badge.svg)](https://github.com/blue-build/template/actions/workflows/build.yml)
+# BlueBuild Template &nbsp; [![bluebuild build badge](https://github.com/butrelinux/bluebuild-template/actions/workflows/build.yml/badge.svg)](https://github.com/butrelinux/bluebuild-template/actions/workflows/build.yml)
 
 1. Open https://github.com/butrelinux/bluebuild-template.
 2. Press “Use this template” and create a new repository.  
