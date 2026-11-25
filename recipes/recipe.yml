@@ -6,8 +6,18 @@ name: bluebuild-template
 description: This is my personal build of butrelinux
 
 # the base image to build on top of (FROM) and the version tag to use
+
+# butrelinux base images:
+# ghcr.io/butrelinux/lts
+# ghcr.io/butrelinux/ml
+# ghcr.io/butrelinux/ml-nvidia
+# ghcr.io/butrelinux/hyperscale
+# ghcr.io/butrelinux/hyperscale-nvidia
+# ghcr.io/butrelinux/lto
+# ghcr.io/butrelinux/lto-nvidia
+
 base-image: ghcr.io/butrelinux/lts
-image-version: latest # You can pin to a specific version of Fedora as well
+image-version: latest # you can also pin to a specific tag or digest, eg. aa4c302-10 20261122-10 20261122 10 sha256-12cce64f57291180d3e080cf1e398ebe5f2984a7c1ebfc20c479f6dd275bdbd1.sig
 
 # module configuration, executed in order
 # you can include multiple instances of the same module
@@ -21,7 +31,12 @@ modules:
     install:
       packages:
         - neovim
-        
+
+  - type: systemd # this is necessary for bluebuild's flatpak module to work properly.  it can be removed entirely if you don't want to use flatpaks in your image.
+    system:
+      unmasked:
+        - system-flatpak-setup.timer
+
   - type: default-flatpaks
     configurations:
       - notify: true 
@@ -30,8 +45,13 @@ modules:
           - org.mozilla.firefox
       - scope: user # Also add Flathub user repo, but no user packages
 
+#  - type: systemd # optionally re-mask the system-flatpak-setup.timer if you don't want it to run in your image.  just delete the comment symbols (#) at the start of each line in this section.
+#    system:
+#      masked:
+#        - system-flatpak-setup.timer
+
   - type: image-info
     source: ghcr.io/butrelinux/modules
     variant: my-personal-image
 
-  - type: signing # this sets up the proper policy & signing files for signed images to work fully
+  - type: signing # this sets up the proper policy & signing files for signed images to work fully.  make any modifications above this line.
